@@ -46,7 +46,7 @@ public class CountryController {
     public List<CountryStatsDTO> getCountriesStats() {
         return countryStatsService.getCountryStats();
     }
-    /* Question 2endpoint end*/
+    /* Question 2endpoint end*/ //
     //TODO EMPTY SPACE
 
     /* Question 3 endpoint stat*/
