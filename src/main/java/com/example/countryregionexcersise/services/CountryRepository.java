@@ -8,7 +8,5 @@ import java.util.List;
 @Repository
 public interface CountryRepository extends BaseRepository<CountriesEntity, Integer> {
 
-    List<CountriesEntity> findByName(String name);
-
 
 }

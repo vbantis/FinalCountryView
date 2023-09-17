@@ -2,6 +2,7 @@ package com.example.countryregionexcersise.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
@@ -12,7 +13,7 @@ import java.sql.Date;
                 query = "SELECT c FROM CountriesEntity c WHERE c.name = :name")
 
 })
-public class CountriesEntity {
+public class CountriesEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "country_id", nullable = false)

@@ -1,9 +1,15 @@
 package com.example.countryregionexcersise.services;
 
+import com.example.countryregionexcersise.DTO.ContinentDTO;
+import com.example.countryregionexcersise.DTO.LanguageDTO;
 import com.example.countryregionexcersise.entities.CountryLanguagesEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +17,8 @@ import java.util.List;
 public class CountryLanguagesService extends BaseService<CountryLanguagesEntity, Integer> {
     private final CountryLanguagesRepository countryRepository;
 
-
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     public CountryLanguagesService(CountryLanguagesRepository repository, CountryLanguagesRepository countryRepository) {
@@ -19,10 +26,17 @@ public class CountryLanguagesService extends BaseService<CountryLanguagesEntity,
         this.countryRepository = countryRepository;
     }
 
-    public List<CountryLanguagesEntity> getSpokenLanguages(String id) {
-        List<CountryLanguagesEntity> countryLanguagesDTO = countryRepository.findSpokenLanguages(id);
+    public List<LanguageDTO> getSpokenLanguages(String id) {
+        Query query = entityManager.createNamedQuery("CountryLanguagesEntity.findSpokenLanguages")
+                .setParameter("id", id);
+        List<String> results = query.getResultList();
+        List<LanguageDTO> dtos = new ArrayList<>();
 
-        return null != countryLanguagesDTO && countryLanguagesDTO.size() > 0 ? countryLanguagesDTO : new ArrayList<CountryLanguagesEntity>();
+        for (String language : results) {
+            LanguageDTO dto = new LanguageDTO(language);
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
     // You can add additional methods specific to CountryService here

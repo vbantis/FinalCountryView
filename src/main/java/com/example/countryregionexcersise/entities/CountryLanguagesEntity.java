@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @IdClass(CountryLanguagesEntityPK.class)
 @NamedQueries({
         @NamedQuery(name = "CountryLanguagesEntity.findSpokenLanguages",
-                query = "SELECT cl FROM CountryLanguagesEntity cl LEFT JOIN LanguagesEntity l on l.languageId= cl.languageId WHERE cl.countryId = :id"),
+                query = "SELECT l.language FROM CountryLanguagesEntity cl LEFT JOIN LanguagesEntity l on l.languageId= cl.languageId WHERE cl.countryId = :id"),
 
 })
 public class CountryLanguagesEntity {

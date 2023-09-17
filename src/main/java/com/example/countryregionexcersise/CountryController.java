@@ -2,6 +2,7 @@ package com.example.countryregionexcersise;
 
 import com.example.countryregionexcersise.DTO.ContinentDTO;
 import com.example.countryregionexcersise.DTO.CountryStatsDTO;
+import com.example.countryregionexcersise.DTO.LanguageDTO;
 import com.example.countryregionexcersise.entities.CountriesEntity;
 import com.example.countryregionexcersise.entities.CountryLanguagesEntity;
 import com.example.countryregionexcersise.services.*;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/countries")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CountryController {
 
     @Autowired
@@ -32,7 +34,7 @@ public class CountryController {
     }
 
     @GetMapping("/country/{id}")
-    public List<CountryLanguagesEntity> getCountriesSpokenLanguages(@PathVariable String id) {
+    public List<LanguageDTO> getCountriesSpokenLanguages(@PathVariable String id) {
         return countryLanguagesService.getSpokenLanguages(id);
     }
 
@@ -41,15 +43,16 @@ public class CountryController {
     //TODO EMPTY SPACE
 
 
-    /* Question 2endpoint stat*/
+    /* Question 2endpoint start*/
     @GetMapping("/stats")
     public List<CountryStatsDTO> getCountriesStats() {
         return countryStatsService.getCountryStats();
     }
     /* Question 2endpoint end*/ //
+
     //TODO EMPTY SPACE
 
-    /* Question 3 endpoint stat*/
+    /* Question 3 endpoint start*/
     @GetMapping("/continents")
     public List<ContinentDTO> getCountriesContinents() {
         return continetsService.getContinentsView();
